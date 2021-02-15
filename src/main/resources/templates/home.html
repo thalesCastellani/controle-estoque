@@ -1,0 +1,28 @@
+<html>
+	<head th:replace="~{base :: head}"></head>
+	
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+		
+		<div class="container">
+			<div th:replace="~{base :: titulo('Estoque')}"></div>
+			
+			<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mb-3">
+				<a href="produtos/novo"><button class="btn btn-primary">Novo</button></a>
+			</nav>
+		
+			<div class="card mb-3" style="max-width: 540px;" th:each="produto : ${produtos}">
+				<div class="card-header d-flex justify-content-between"><span th:text="${produto.descricao}"></span>
+					<a href="/home/produtos/remove"><button class="btn btn-danger">Deletar</button></a>
+				</div>
+				<div class="card-body">
+					<div>Unidade: <span th:text="${produto.unidade}"></span></div>
+					<div>Valor: <span th:text="${'R$ ' + #numbers.formatDecimal(produto.valor,2,'POINT',2,'COMMA')}"></span></div>
+					<div>Quantidade: <span th:text="${produto.quantidade}"></span></div>
+					<div>NCM: <span th:text="${produto.ncm}"></div>
+					<div>Data entrada: <span th:text="${#temporals.format(produto.data, 'dd/MM/yyyy')}"></span></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
